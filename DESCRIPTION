@@ -1,0 +1,26 @@
+Package: ISCAM
+Title: Introduction to Fundamental Concepts and Various Applications of Statistics
+Version: 1.0
+Authors@R: c(
+  person("Noelle", "Pablo", email = "noellebpablo@gmail.com", role = c("aut", "cre")),
+  person("Ashley", "Jacobson", email = "ashleypjacobson@gmail.com", role = c("aut")),
+  person("Beth", "Chance", email = "bchance@calpoly.edu", role = c("aut")))
+Description: This package includes various functions that accompany the textbook,
+    Investigating Statistical Concepts, Applications, and Methods (ISCAM), 
+    written by Beth Chance and Allan Rossman.
+Depends: R (>= 3.4.0)
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports:
+  graphics,
+  stats,
+  ggplot2,
+  utils,
+  dplyr,
+  gridExtra,
+  skimr
+Suggests: 
+  knitr,
+  rmarkdown
