@@ -1,31 +1,30 @@
 ---
-title: "ISCAM Package"
-author: "Noelle Pablo"
+title: "Guide to using ISCAM"
+author: "Noelle Pablo, Ashley Jacobson, Beth Chance"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ISCAM Package}
+  %\VignetteIndexEntry{Guide to using ISCAM}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
-chooseCRANmirror(graphics=FALSE, ind=1)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
+## Introduction
+
 This package contains a variety of R functions to accompany the introductory statistics textbook, _Investigating Statistiscal Concepts, Applications, and Methods_ (ISCAM), written by Dr. Allan Rossman and Dr. Beth Chance. These functions are to aid students in their investigations, assignments, and projects. The functions are categorized into 5 groups: Data Visualization, Summary Statistics, Hypothesis Testing, Quantiles, Rejection Regions & Power, Probability Distributions, Normal Approximations, and Overlaying Probability Distributions.
 
-To install the ISCAM package, run the following code:
-```{r, message = FALSE}
-install.packages("devtools") # If you already have the devtools package installed, you may skip this line
-library(devtools)
-devtools::install_github("shannonpileggi/SP--Pablo--RProgramming/ISCAM", build_vignettes = TRUE)
+```{r}
 library(ISCAM)
 ```
+
+
 ## Data Visualization
 - **iscam_boxplot**
 
