@@ -1,6 +1,6 @@
 #' iscam_twosamplet Function
 #'
-#' This function calculates a two sample t-test and/or interval from summary data. 
+#' This function calculates a two sample t-test and/or interval from summary data.
 #' @param x1 observed mean
 #' @param sd1 observed standard deviation
 #' @param n1 sample size
@@ -8,7 +8,7 @@
 #' @param sd2 observed standard deviation
 #' @param n2 sample size
 #' @param hypothesized hypothesized difference in population means (default = 0)
-#' @param alternative form of alternative ("less", "greater", or "two.sided") 
+#' @param alternative form of alternative ("less", "greater", or "two.sided")
 #' @param conf.level a confidence level for a two-sided confidence interval
 #' @keywords two sample t test
 #' @export
@@ -27,6 +27,7 @@ iscam_twosamplet <-
            hypothesized = 0,
            alternative = NULL,
            conf.level = 0) {
+    y <- NULL
     cat("\n", "Two Sample t test\n", sep = "", "\n")  # output
     statistic1 = x1
     statistic2 = x2
@@ -36,14 +37,14 @@ iscam_twosamplet <-
                                                                                                                                  1)),
                 4)
     unpooledsd = sqrt(sd1 * sd1 / n1 + sd2 * sd2 / n2)
-    
+
     cat(paste("Group1: mean = ", x1, ", sd = ", sd1, ",  sample size = ", n1, "\n", sep =
                 ""))  # output
     cat(paste("Group2: mean = ", x2, ", sd = ", sd2, ",  sample size = ", n2, "\n", sep =
                 ""))  # output
     cat(paste("diff: ", x1 - x2, "\n\n", sep = ""))  # output
     maintitle <- paste("t (df = ", df, ")", sep = "")  # title of plot
-    
+
     if (!is.null(alternative)) {  # when alternative is specified
       cat(paste("Null hypothesis       : mu1-mu2 =", hypothesized, sep = " "),
           "\n")  # output
@@ -61,7 +62,7 @@ iscam_twosamplet <-
         sep = " "
       ),
       "\n")
-      
+
       tvalue = (statistic1 - statistic2 - hypothesized) / unpooledsd
       subtitle1 <- paste("t-statistic:", signif(tvalue, 4), "\n")
       cat("t-statistic:", signif(tvalue, 4), "\n")
@@ -77,7 +78,7 @@ iscam_twosamplet <-
       max = max(4, tvalue + .001)
       diffmax = max(hypothesized + 4 * unpooledsd,
                     hypothesized + abs(hypothesized - statistic) + .001)
-      
+
       x = seq(min, max, .001)
       diffx = x * unpooledsd + hypothesized
       # creating second x axis
@@ -86,11 +87,11 @@ iscam_twosamplet <-
       perc <-
         c("t = -3", "t = -2", "t = -1", "t = 0", "t = 1", "t = 2", "t = 3")
       l <- paste(round(xticks, 2), perc, sep = "\n")
-      
+
       data <- data.frame(x = diffx, y = dt(x, df))
       plot <-
-        ggplot(data, aes(x = x, y = y)) + geom_line(color = "dodgerblue")  # creating density curve
-      
+        ggplot(data, aes_string(x = "x", y = "y")) + geom_line(color = "dodgerblue")  # creating density curve
+
       if (alternative == "less") {
         pvalue <- signif(pt(tvalue, df), 4)  # t p-value
         subtitle2 <- paste("p-value: ", pvalue)
@@ -116,7 +117,7 @@ iscam_twosamplet <-
       } else if (alternative == "two.sided" ||
                  alternative == "not.equal") {
         pvalue <- signif(2 * pt(-1 * abs(tvalue), df), 4)
-        
+
         subtitle2 <- paste("two-sided p-value: ", pvalue)
         plot1 <- plot +
           geom_ribbon(
@@ -162,8 +163,8 @@ iscam_twosamplet <-
     }
     lower = NULL
     upper = NULL
-    
-    
+
+
     if (conf.level != 0) {
       if (conf.level > 1)
         conf.level = conf.level / 100
@@ -226,7 +227,7 @@ iscam_twosamplet <-
                               list(x1 = signif(upper, 4)))
         title(newtitle)
         #newtitle=substitute(paste("t (", df==x1, ")", ), list(x1=signif(upper,4), x2=signif(sephat, 4)));   title(newtitle)
-        
+
         plot(
           c(min, statistic, max),
           c(1, 1, 1),

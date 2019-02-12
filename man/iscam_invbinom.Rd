@@ -11,7 +11,7 @@ iscam_invbinom(alpha, n, prob, lower.tail)
 
 \item{n}{sample size}
 
-\item{prob}{despired probability of success}
+\item{prob}{probability of success}
 
 \item{lower.tail}{upper tail (FALSE) or lower tail (TRUE)}
 }

@@ -16,7 +16,7 @@ iscam_addnorm <- function(x) {
   max = max(x) # Max of x axis
   myseq = seq(min, max, .001) # Create numeric sequence from min to max by .001
   ggplot(df, aes(x)) +
-    geom_histogram(aes(y = (..density..)), # Histogram of data
+    geom_histogram(aes_string(y = ("..density..")), # Histogram of data
       binwidth = (max(x) - min(x)) / 20,
       colour = "black",
       fill = "white") +

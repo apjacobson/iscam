@@ -1,6 +1,6 @@
 #' iscam_twopropztest Function
 #'
-#' This function calculates a two proportion z-test and/or interval. 
+#' This function calculates a two proportion z-test and/or interval.
 #' @param observed1 observed number of successes or sample proportions (assumed if value is less than one)
 #' @param n1 sample size
 #' @param observed2 observed number of successes (assumed if value is less than one)
@@ -33,8 +33,8 @@ iscam_twopropztest <-
       observed2 = datatable[3]
       n2 = datatable[3] + datatable[4]
     }
-    
-    
+
+
     pvalue = NULL
     zvalue = NULL
     # converting proportion into number of successes
@@ -103,18 +103,18 @@ iscam_twopropztest <-
       max <- max(hypothesized + 4 * SD, hypothesized + abs(zvalue) * SD +
                    .001)
       x <- seq(min, max, .001)
-      
+
       # creating second x axis
       my_seq <- -3:3
       xticks <- hypothesized + my_seq * SD
       perc <- c("z=-3", "z=-2", "z=-1", "z=0", "z=1", "z=2", "z=3")
       l <- paste(round(xticks, 2), perc, sep = "\n")
-      
+
       data <- data.frame(x = x, y = dnorm(x, hypothesized, SD))
       if (alternative == "less") {
         pvalue <- signif(pnorm(zvalue), 4)
         subtitle2 <- paste("p-value:", pvalue)
-        plot1 <- ggplot(data, aes(x = x, y = y)) +
+        plot1 <- ggplot(data, aes_string(x = "x", y = "y")) +
           stat_function(
             fun = dnorm,  # drawing normal density curve
             args = list(mean = hypothesized, sd = SD),
@@ -131,7 +131,7 @@ iscam_twopropztest <-
       } else if (alternative == "greater") {
         pvalue <- signif(1 - pnorm(zvalue), 4)
         subtitle2 <- paste("p-value:", pvalue)
-        plot1 <- ggplot(data, aes(x = x, y = y)) +
+        plot1 <- ggplot(data, aes_string(x = "x", y = "y")) +
           stat_function(
             fun = dnorm,  # drawing normal density curve
             args = list(mean = hypothesized, sd = SD),
@@ -156,7 +156,7 @@ iscam_twopropztest <-
           lowerstat <- hypothesized - (statistic - hypothesized)
           upperstat <- statistic
         }
-        plot1 <- ggplot(data, aes(x = x, y = y)) +
+        plot1 <- ggplot(data, aes_string(x = "x", y = "y")) +
           stat_function(
             fun = dnorm,  # drawing normal density curve
             args = list(mean = hypothesized, sd = SD),
@@ -182,7 +182,7 @@ iscam_twopropztest <-
     }
     lower = NULL
     upper = NULL
-    
+
     if (!is.null(conf.level)) {
       if (length(conf.level) > 1)
         par(mar = c(4, 2, 1.5, 4), mfrow = c(length(conf.level), 1))
@@ -213,9 +213,9 @@ iscam_twopropztest <-
         niceupper <- round(upper, 4)
         if (length(conf.level) == 1) {
           title2.1 <-
-            substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")",),
+            substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")"),
                        list(x1 = signif(lower[1], 4), x2 = signif(sephat, 4)))
-          plot2.1 <- ggplot(data, aes(x = x, y = y)) +
+          plot2.1 <- ggplot(data, aes_string(x = "x", y = "y")) +
             stat_function(
               fun = dnorm,
               #drawing normal density curve
@@ -245,11 +245,11 @@ iscam_twopropztest <-
               y = 0,
               yend = 0
             ), color = "dodgerblue")
-          
+
           title2.2 <-
-            substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")",),
+            substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")"),
                        list(x1 = signif(upper[1], 4), x2 = signif(sephat, 4)))
-          plot2.2 <- ggplot(data, aes(x = x, y = y)) +
+          plot2.2 <- ggplot(data, aes_string(x = "x", y = "y")) +
             stat_function(
               fun = dnorm,
               #drawing normal density curve
@@ -279,9 +279,9 @@ iscam_twopropztest <-
               y = 0,
               yend = 0
             ), color = "dodgerblue")
-          
+
           midpoint <- signif((upper[1] - lower[1]) / 2 + lower[1], 4)
-          plot2_3 <- ggplot(data, aes(x = x, y = y)) +
+          plot2_3 <- ggplot(data, aes_string(x = "x", y = "y")) +
             geom_segment(aes(
               x = upper[1],
               y = 1,

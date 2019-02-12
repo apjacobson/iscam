@@ -13,7 +13,7 @@ iscam_binomnorm(k, n, prob, direction)
 
 \item{prob}{probability of success on each trial}
 
-\item{direction}{allows you to specify whether you want to find the probability 
+\item{direction}{allows you to specify whether you want to find the probability
 "above" or "below" k or a symmetric "two.sided" probability}
 }
 \description{

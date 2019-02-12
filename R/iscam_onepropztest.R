@@ -4,7 +4,7 @@
 #' @param observed number of success or sample proportion (assumed if value is less than 1)
 #' @param n sample size
 #' @param hypothesized hypothesized probability of success
-#' @param alternative form of alternative hypothesis "less", "greater", or "two.sided" 
+#' @param alternative form of alternative hypothesis "less", "greater", or "two.sided"
 #' @param conf.level confidence level(s) for a two-sided confidence interval
 #' @keywords one proportion z test
 #' @export
@@ -24,11 +24,11 @@ iscam_onepropztest <-
     if (observed < 1) {  # converting sample proportion to number of successes
       observed <-
         round(n * observed)
-    }   
+    }
     # R's built in one prop z test
     proptest <-
-      prop.test(observed, n, hypothesized, alternative, correct = FALSE)  
-    
+      prop.test(observed, n, hypothesized, alternative, correct = FALSE)
+
     cat("\n", "One Proportion z test\n", sep = "", "\n")  # output
     statistic <- signif(observed / n, 4)   # proportion of successes
     cat(
@@ -45,7 +45,7 @@ iscam_onepropztest <-
     )
     zvalue <- NULL
     pvalue <- NULL
-    
+
     # When a hypothesized value is specified
     if (!is.null(hypothesized)) {
       zvalue <-
@@ -55,23 +55,23 @@ iscam_onepropztest <-
       pvalue <- signif(proptest$p.value, 4)
       subtitle2 <- paste("p-value:", pvalue)
       cat("p-value:", pvalue, "\n")
-      
+
       SD <- sqrt(hypothesized * (1 - hypothesized) / n) # std error
-      
+
       # finding x limits
       min <- min(hypothesized - 4 * SD, hypothesized - abs(zvalue) * SD -
                    .001)
       max <- max(hypothesized + 4 * SD, hypothesized + abs(zvalue) * SD +
                    .001)
       x <- seq(min, max, .001)
-      
+
       my_seq <- -3:3   # setting up 2nd x axis
       xticks <- hypothesized + my_seq * SD
       perc <- c("z=-3", "z=-2", "z=-1", "z=0", "z=1", "z=2", "z=3")
       l <- paste(round(xticks, 2), perc, sep = "\n")
-      
+
       data <- data.frame(x = x, y = dnorm(x, hypothesized, SD))
-      plot <- ggplot(data, aes(x = x, y = y))
+      plot <- ggplot(data, aes_string(x = "x", y = "y"))
       if (alternative == "less") {
         plot1 <- plot +
           stat_function(
@@ -135,7 +135,7 @@ iscam_onepropztest <-
           )
       }
       mysubtitle <- paste(subtitle1, subtitle2)
-      
+
       finalplot <- plot1 +
         geom_segment(aes(
           x = min,
@@ -155,11 +155,11 @@ iscam_onepropztest <-
         scale_x_continuous(breaks = xticks,
                            labels = l,
                            limits = c(min, max))
-      
-      
+
+
       print(finalplot)
     }
-    
+
     lower = 0
     upper = 0
     if (!is.null(conf.level)) {
@@ -182,23 +182,23 @@ iscam_onepropztest <-
             sep = "")
       }
     }
-    
-    
+
+
     # making plots when hypothesized and alternative are not specified, but conf.level is specified
     if (is.null(hypothesized)) {
       SDphat <- sqrt(statistic * (1 - statistic) / n)
       min <- statistic - 4 * SDphat
       max <- statistic + 4 * SDphat
       CIseq <- seq(min, max, .001)
-      
+
       if (length(conf.level) == 1) {
         data <- data.frame(x = CIseq, y = dnorm(CIseq, lower[1], SDphat))
         nicelower <- round(lower, 4)
         niceupper <- round(upper, 4)
         title2.1 <-
-          substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")",),
+          substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")"),
                      list(x1 = signif(lower[1], 4), x2 = signif(SDphat, 4)))
-        plot2.1 <- ggplot(data, aes(x = x, y = y)) +
+        plot2.1 <- ggplot(data, aes_string(x = "x", y = "y")) +
           stat_function(
             fun = dnorm,
             #drawing normal density curve
@@ -229,9 +229,9 @@ iscam_onepropztest <-
             yend = 0
           ), color = "dodgerblue")
         title2.2 <-
-          substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")",),
+          substitute(paste("Normal (", mean == x1, ", ", SD == x2, ")"),
                      list(x1 = signif(upper[1], 4), x2 = signif(SDphat, 4)))
-        plot2.2 <- ggplot(data, aes(x = x, y = y)) +
+        plot2.2 <- ggplot(data, aes_string(x = "x", y = "y")) +
           stat_function(
             fun = dnorm,
             #drawing normal density curve
@@ -263,7 +263,7 @@ iscam_onepropztest <-
           ), color = "dodgerblue")
         CIsubtitle <- paste(100 * conf.level[1], "% Confidence Interval", sep = "")
         midpoint <- signif((upper[1] - lower[1]) / 2 + lower[1], 4)
-        plot2_3 <- ggplot(data, aes(x = x, y = y)) +
+        plot2_3 <- ggplot(data, aes_string(x = "x", y = "y")) +
           geom_segment(aes(
             x = upper[1],
             y = 1,
@@ -283,7 +283,7 @@ iscam_onepropztest <-
           geom_text(x = upper - 0.01,
                     y = 1.2,
                     label = niceupper) +
-          labs(x = "Process Probability", 
+          labs(x = "Process Probability",
                title = CIsubtitle) +
           theme(
             axis.title.y = element_blank(),

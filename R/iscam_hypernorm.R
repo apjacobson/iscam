@@ -13,6 +13,7 @@
 #' iscam_hypernorm(2, 52, 5, 26, lower.tail = TRUE)
 
 iscam_hypernorm <- function (k, total, succ, n, lower.tail) {
+  x <- NULL
   if (k < 1)
     k <- round((k * n * (total - n) + n * succ) / total)
   fail <- total - succ
@@ -28,7 +29,7 @@ iscam_hypernorm <- function (k, total, succ, n, lower.tail) {
   df <-
     data.frame(x = thisx, y = dhyper(thisx, succ, fail, n)) #putting data into data frame
 
-  plot <- ggplot(df, aes(x = x, y = y, width = 0.05)) +
+  plot <- ggplot(df, aes_string(x = "x", y = "y", width = 0.05)) +
     geom_bar(
       stat = "identity",  # creating bars
       col = "black",

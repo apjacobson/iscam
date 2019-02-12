@@ -15,7 +15,7 @@ iscam_addt <- function(x, df) {
   data <- data.frame(x) # Converting numeric vector to a data frame
   ggplot(data, aes(x)) +
     geom_histogram( # Histogram for inputted variable
-      aes(y = (..density..)),
+      aes_string(y = ("..density..")),
       binwidth = (max(x) - min(x)) / 20,
       colour = "black",
       fill = "white") +

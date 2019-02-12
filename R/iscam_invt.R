@@ -14,6 +14,7 @@
 #' iscam_invt(.55, 5, direction = "outside")
 
 iscam_invt <- function(prob1, df, direction) {
+  x <- NULL
   mydf <- data.frame(x = c(-4, 4))  # Data frame with x from -4 to 4
   upper <- qt(prob1, df, lower.tail = F)  # when direction == above
   lower <- qt(prob1, df)  # when direction == below
@@ -22,7 +23,7 @@ iscam_invt <- function(prob1, df, direction) {
   outupper <- -signif(qt(prob1 / 2, df, lower.tail = TRUE), 4)  # when direction == outside
   outlower <- -outupper  # # when direction == outside
   mytitle <- paste("t distribution with", df, "degrees of freedom")  # graph's main title
-  
+
   if (direction == "above") {
     answer <- signif(upper, 4)  # t quantile
     mysubtitle <- paste("Pr(T > ", answer, ") = ", prob1, sep = "")

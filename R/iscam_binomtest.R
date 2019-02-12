@@ -20,16 +20,17 @@ iscam_binomtest <-
            hypothesized,
            alternative,
            conf.level = NULL) {
+    x <- NULL
     if (observed < 1) {  # converting proportion into number of successes
       observed <- round(n * observed)
     }
     myTitle <-
-      substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")",),
+      substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")"),
                  list(x1 = n, x2 = hypothesized))  # graph's main title
-    thisx <- 0:n  # range of data (number of trials) 
+    thisx <- 0:n  # range of data (number of trials)
     df <-
       data.frame(x = thisx, y = dbinom(thisx, n, hypothesized))  # putting data into data frame
-    
+
     if (is.null(conf.level)) {
       binomtest <- binom.test(observed, n, hypothesized, alternative)  # binomial test w/o CI
     } else {
@@ -37,14 +38,14 @@ iscam_binomtest <-
         binom.test(observed, n, hypothesized, alternative, conf.level)  # binomial test w/ CI
       CI <- binomtest$conf.int  # extracting CI from binomial test in r
     }
-    
+
     pvalue <- binomtest$p.value  # extract p value
     showprob <- format(pvalue, digits = 4)
-    
+
     if (alternative == "less") {
       mySubtitle <- paste("p-value =", showprob)  #creating subtitle
-      
-      plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+
+      plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
         geom_bar(  # sets up bar graph
           stat = "identity",
           col = "black",
@@ -69,7 +70,7 @@ iscam_binomtest <-
     }
     else if (alternative == "greater") {
       mySubtitle <- paste("P-value =", showprob)
-      plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+      plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
         geom_bar(
           stat = "identity",
           col = "black",
@@ -101,7 +102,7 @@ iscam_binomtest <-
         ifelse(phat > hypothesized, phat, hypothesized + phatdiff) * n
       lower <-
         ifelse(phat < hypothesized, phat, hypothesized - phatdiff) * n
-      plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+      plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
         geom_bar(
           stat = "identity",
           col = "black",
@@ -150,7 +151,7 @@ iscam_binomtest <-
     cat(paste("Alternative hypothesis: pi", altname, hypothesized, sep = " "),
         "\n")
     cat(paste("p-value:", showprob, sep = " "), "\n")
-    
+
     if (!is.null(conf.level)) {
       cat(100 * conf.level, "% Confidence interval for pi:", CI)
     }

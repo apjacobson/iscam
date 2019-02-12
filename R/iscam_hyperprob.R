@@ -13,6 +13,7 @@
 #' iscam_hyperprob(2, 52, 5, 13, lower.tail = FALSE)
 
 iscam_hyperprob <- function(k, total, succ, n, lower.tail) {
+  x = NULL
   # Converting proportion into number of successes
   if (k < 1 & k > 0) {
     k <- round((k * (total - n) * n + succ * n) / total)
@@ -27,7 +28,7 @@ iscam_hyperprob <- function(k, total, succ, n, lower.tail) {
     showprob <- format(this.prob, digits = 4)  # formatting hyper. prob.
     mySubtitle <-
       paste("P(X \u2264 ", k, ") = ", showprob, sep = "")
-    plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
       geom_bar(  # Setting up Bar graph
         stat = "identity",
         col = "black",
@@ -56,7 +57,7 @@ iscam_hyperprob <- function(k, total, succ, n, lower.tail) {
     showprob <- format(this.prob, digits = 4)  # formatting probability
     mySubtitle <-
       paste("P(X \u2265 ", k, ") = ", showprob, sep = "")
-    plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
       geom_bar(  # Setting up bar graph
         stat = "identity",
         col = "black",
@@ -80,5 +81,5 @@ iscam_hyperprob <- function(k, total, succ, n, lower.tail) {
       theme(plot.subtitle = element_text(color = "#3366FF"))
     cat("Probability", k, "and above =", this.prob, "\n")
   }
-  print(plot1)  
+  print(plot1)
 }

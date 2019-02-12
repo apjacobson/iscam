@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-This package contains a variety of R functions to accompany the introductory statistics textbook, _Investigating Statistiscal Concepts, Applications, and Methods_ (ISCAM), written by Dr. Allan Rossman and Dr. Beth Chance. These functions are to aid students in their investigations, assignments, and projects. The functions are categorized into 5 groups: Data Visualization, Summary Statistics, Hypothesis Testing, Quantiles, Rejection Regions & Power, Probability Distributions, Normal Approximations, and Overlaying Probability Distributions.
+This package contains a variety of R functions to accompany the introductory statistics textbook, _Investigating Statistical Concepts, Applications, and Methods_ (ISCAM), written by Dr. Allan Rossman and Dr. Beth Chance. These functions are to aid students in their investigations, assignments, and projects. The functions are categorized into 5 groups: Data Visualization, Summary Statistics, Hypothesis Testing, Quantiles, Rejection Regions & Power, Probability Distributions, Normal Approximations, and Overlaying Probability Distributions.
 
 ```{r}
 library(ISCAM)

@@ -15,7 +15,7 @@ iscam_addtnorm <- function(x, df){
     data <- data.frame(x) # Converting inputted variable into a data frame
     ggplot(data, aes(x)) +
       geom_histogram( # Histogram of inputted variable
-        aes(y = (..density..)),
+        aes_string(y = ("..density..")),
         binwidth = (max(x) - min(x)) / 20,
         colour = "black",
         fill = "white"

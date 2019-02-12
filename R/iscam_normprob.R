@@ -1,10 +1,10 @@
 #' iscam_normprob Function
 #'
-#' This function calculates tail probability for the normal distribution. 
+#' This function calculates tail probability for the normal distribution.
 #' @param xval x value
 #' @param mean default mean = 0
 #' @param sd default standard deviation = 1
-#' @param direction a String for finding the probability above "above" or below "below" the inputted value. If "outside" or "between" are specified, a second larger observation needs to be given at the end.  
+#' @param direction a String for finding the probability above "above" or below "below" the inputted value. If "outside" or "between" are specified, a second larger observation needs to be given at the end.
 #' @param label It is highly recommended that you indicate a label for the horizontal axis, with the quotation marks e.g., "sample proportions"
 #' @param xval2 used if direction is specified as "outside" or "between"
 #' @param digits number of tick marks on x axis
@@ -39,7 +39,7 @@ iscam_normprob <-
     xlabel <- "x-variable"
     if (!is.null(label))
       xlabel <- label
-    
+
     data <- data.frame(x = thisx, y = dnorm(xval, mean, sd))
     myTitle <-
       paste("Normal(mean = ", mean, ", SD = ", sd, ")", sep = "")
@@ -48,7 +48,7 @@ iscam_normprob <-
       showprob <- format(normprob, digits = 4)
       mySubtitle <-
         paste("Pr(X \u2264 ", xvallabel, ") = ", showprob, sep = "")
-      plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+      plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
         stat_function(fun = dnorm,
                       #drawing normal density curve
                       args = list(mean = mean, sd = sd),
@@ -74,7 +74,7 @@ iscam_normprob <-
       showprob <- format(normprob, digits = 4)
       mySubtitle <-
         paste("Pr(X \u2265 ", xvallabel, ") = ", showprob, sep = "")
-      plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+      plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
         stat_function(fun = dnorm,  # drawing normal density curve
                       args = list(mean = mean, sd = sd),
                       color = "dodgerblue") +
@@ -107,7 +107,7 @@ iscam_normprob <-
               ") = ",
               showprob,
               sep = "")
-      plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+      plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
         stat_function(fun = dnorm,  # drawing normal density curve
                       args = list(mean = mean, sd = sd),
                       color = "dodgerblue") +
@@ -152,7 +152,7 @@ iscam_normprob <-
           showprob,
           sep = ""
         )  # subtitle for plot
-      plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+      plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
         stat_function(fun = dnorm,  # drawing normal density curve
                       args = list(mean = mean, sd = sd),
                       color = "dodgerblue") +

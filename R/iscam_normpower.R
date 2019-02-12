@@ -20,6 +20,7 @@ iscam_normpower <-
            alternative,
            prob2 = NULL,
            explain = FALSE) {
+
     # Calculating x limits for graph
     minx <-
       max(0, min(prob1 - 4 * sqrt(prob1 * (1 - prob1) / n), prob2 - 4 * sqrt(prob2 *
@@ -42,7 +43,7 @@ iscam_normpower <-
       subtitle <-
         paste("P(p-hat \u2264 ", rr, ") = ", showprob1, sep = "")  # creating subtitle
       df <- data.frame(x = thisx, y = dnorm(thisx, mean, std))
-      plot <- ggplot(df, aes(x = x, y = y, width = 0.15))
+      plot <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15))
       if (!isTRUE(explain)) {  # when explain is set to false
         plot1 <- plot +
           stat_function(
@@ -87,7 +88,7 @@ iscam_normpower <-
       subtitle <-
         paste("P(p-hat \u2265 ", rr, ") = ", showprob1, sep = "")
       df <- data.frame(x = thisx, y = dnorm(thisx, mean, std))
-      plot <- ggplot(df, aes(x = x, y = y, width = 0.15))
+      plot <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15))
       if (!isTRUE(explain)) {
         plot1 <- plot +
           stat_function(
@@ -144,7 +145,7 @@ iscam_normpower <-
               showprob1,
               sep = "")  # for subtitle
       df <- data.frame(x = thisx, y = dnorm(thisx, mean, std))
-      plot <- ggplot(df, aes(x = x, y = y, width = 0.15))
+      plot <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15))
       if (!isTRUE(explain)) {
         plot1 <- plot +
           stat_function(
@@ -221,7 +222,7 @@ iscam_normpower <-
         subtitle2 <-
           paste("P(p-hat \u2264 ", rr, ") = ", showprob2, sep = "")
         df <- data.frame(x = thisx, y = dnorm(thisx, mean2, std2))
-        plot <- ggplot(df, aes(x = x, y = y, width = 0.15))
+        plot <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15))
         if (!isTRUE(explain)) {
           plot2 <- plot +
             stat_function(
@@ -283,7 +284,7 @@ iscam_normpower <-
         subtitle2 <-
           paste("P(p-hat \u2265 ", rr, ") = ", showprob2, sep = "")
         df <- data.frame(x = thisx, y = dnorm(thisx, mean2, std2))
-        plot <- ggplot(df, aes(x = x, y = y, width = 0.15))
+        plot <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15))
         cat("\n", "Probability", rr, "and above =", showprob2)
         if (!isTRUE(explain)) {
           plot2 <- plot +
@@ -365,7 +366,7 @@ iscam_normpower <-
             showprob2
           )
         df <- data.frame(x = thisx, y = dnorm(thisx, mean2, std2))
-        plot <- ggplot(df, aes(x = x, y = y, width = 0.15))
+        plot <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15))
         if (!isTRUE(explain)) {
           plot2 <- plot +
             stat_function(

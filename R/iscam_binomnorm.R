@@ -1,11 +1,11 @@
 #' iscam_binomnorm Function
 #'
-#' This function illustrates the normal approximation to the binomial. 
+#' This function illustrates the normal approximation to the binomial.
 #' @param k number of successes of interest
 #' @param n number of trials (zero or more)
 #' @param prob probability of success on each trial
-#' @param direction allows you to specify whether you want to find the probability 
-#' "above" or "below" k or a symmetric "two.sided" probability 
+#' @param direction allows you to specify whether you want to find the probability
+#' "above" or "below" k or a symmetric "two.sided" probability
 #' @keywords binomial normal
 #' @import stats graphics ggplot2
 #' @export
@@ -15,29 +15,30 @@
 #' iscam_binomnorm(13, 44, 0.40, direction = "two.sided")
 
 iscam_binomnorm <- function(k, n, prob, direction){
+  x = NULL
   # Creates x values from 0 to n
   thisx <- 0:n
   phat <- thisx / n  # Proportions for each x value
-  
+
   # Calculating x limits for graph
   minx <- floor(max(0, n * prob - 4 * sqrt(prob * (1 - prob) * n)))
   maxx <- ceiling(min(n, n * prob + 4 * sqrt(prob * (1 - prob) * n)))
-  
+
   # Calculating mean & sd for normal approx.
   normmean <- n * prob
   normsd <- sqrt(n * prob * (1 - prob))
-  
+
   # Putting data into data frame
-  df <- data.frame(x = thisx, y = dbinom(thisx, n, prob))  
-  
+  df <- data.frame(x = thisx, y = dbinom(thisx, n, prob))
+
   # Determining x tick marks & x tick labels
   xticks <- seq(from = minx,
                 to = maxx,
                 by = round((maxx - minx) / 7, 0))
   perc <- round(xticks / n, 2)  # Calculate proportions for each x tick
   l <- paste(round(xticks, 1), perc, sep = "\n")  # x tick labels
-  
-  
+
+
   if (direction =="below") {
     direction <- "less"
     binomtest <-
@@ -46,16 +47,16 @@ iscam_binomnorm <- function(k, n, prob, direction){
     showprob <- format(pvalue, digits = 4)  # formatting p-value
     normprob <- pnorm(k, normmean, normsd) #  normal probability
     normprob2 <- pnorm(k + .5, normmean, normsd)  # normal prob. w/ continuity corr.
-    shownormprob <- format(normprob, digits = 4)  # format normal prob. 
+    shownormprob <- format(normprob, digits = 4)  # format normal prob.
     shownormprob2 <- format(normprob2, digits = 4)  # format normal prob. w/ cont. corr
     myTitle <- paste("Pr(X \u2264 ", k, ") = ", sep = "")  # graph's title
     subtitle2 <- paste("Normal Approximation:", shownormprob, "\n")  # 2nd subtitle
-    subtitle3 <- 
+    subtitle3 <-
       paste("Normal Approximation with Continuity:", shownormprob2)  # 3rd subtitle
-    
+
     mySubtitle <-
       paste("Binomial: ", showprob, "\n", subtitle2, subtitle3, sep = "")  # creating subtitle
-    plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
       geom_bar(  # creating bar graph
         stat = "identity",
         col = "black",
@@ -121,11 +122,11 @@ iscam_binomnorm <- function(k, n, prob, direction){
     subtitle2 <- paste("Normal Approximation:", shownormprob, "\n")
     subtitle3 <-
       paste("Normal Approximation with Continuity:", shownormprob2)
-    
+
     mySubtitle <-
       paste("Binomial: ", showprob, "\n", subtitle2, subtitle3, sep = "") #creating subtitle
-    
-    plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+
+    plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
       stat_function(
         fun = dnorm,
         #shade in under normal curve
@@ -185,18 +186,18 @@ iscam_binomnorm <- function(k, n, prob, direction){
       binom.test(k, n, prob, direction) #setting up binom.test to get binom p-val
     pvalue <- binomtest$p.value
     showprob <- format(pvalue, digits = 4)
-    
+
     # Determining where to shade in the lower and upper tails of graph
     phat <- k / n
     phatdiff <- abs(phat - prob)
     upper <- ifelse(phat > prob, phat, prob + phatdiff) * n
     lower <- ifelse(phat < prob, phat, prob - phatdiff) * n
-    
+
     # Calculating normal probabilities
     if (k < normmean) {
       k1 <- k
-      k2 <- floor(min(normmean - k + normmean, n)) 
-      newvalue <- dbinom(k2, size = n, prob) 
+      k2 <- floor(min(normmean - k + normmean, n))
+      newvalue <- dbinom(k2, size = n, prob)
       if (newvalue <= dbinom(k1, size = n, prob) + .00001) {
         k2 = k2
       }
@@ -228,10 +229,10 @@ iscam_binomnorm <- function(k, n, prob, direction){
     subtitle2 <- paste("Normal Approximation:", shownormprob, "\n")
     subtitle3 <-
       paste("Normal Approximation with Continuity:", shownormprob2)
-    
+
     mySubtitle <-
       paste("Binomial: ", showprob, "\n", subtitle2, subtitle3, sep = "") #creating subtitle
-    plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
       stat_function(
         fun = dnorm,
         #shade in under normal curve
@@ -321,7 +322,7 @@ iscam_binomnorm <- function(k, n, prob, direction){
                                                          labels = l,
                                                          limits = c(minx, maxx))
   print(finalplot)
-  
+
   output1 <- paste("Binomial (n = ", n, ", \u03C0 = ", prob, ")", sep =
                      "")
   output2 <- paste("Normal(mean = ", prob, ", SD = ", signif(normsd / n, 4), ")", sep =
@@ -330,7 +331,7 @@ iscam_binomnorm <- function(k, n, prob, direction){
   cat(output1, "\n")
   cat(output2, "\n")
   cat(output3)
-  
+
   #removes warnings
   #oldw <- getOption("warn")
   #options(warn = -1)

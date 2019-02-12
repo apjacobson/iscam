@@ -11,7 +11,7 @@
 #' @param prob2 NULL or a second probability
 #' @param explain logical, default = FALSE. Set to TRUE to see type I and II error and power on the graph
 #' @keywords binomial power rejection region
-#' @import stats graphics ggplot2 dplyr gridExtra
+#' @import stats graphics ggplot2 gridExtra
 #' @export
 #' @examples
 #' iscam_binompower(.05, 30, 0.5, alternative = "greater")
@@ -28,6 +28,7 @@ iscam_binompower <-
            explain = FALSE) {
 
     # Calculating x limits for graph
+    x = NULL
     minx <-
       max(0, min(n * prob1 - 4 * sqrt(prob1 * (1 - prob1) * n), n * prob2 - 4 *
                    sqrt(prob2 * (1 - prob2) * n)))
@@ -48,7 +49,7 @@ iscam_binompower <-
         paste("P(X \u2264 ", rr, ") = ", showprob1, sep = "")  # creating subtitle
       df <- data.frame(x = thisx, y = dbinom(thisx, n, prob1))  # Creating data frame
       if (!isTRUE(explain)) {
-        plot1 <- ggplot(df, aes(x = x, y = y, width = 0.15)) +
+        plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15)) +
           geom_bar(  # bar graph
             stat = "identity",
             col = "black",
@@ -64,7 +65,7 @@ iscam_binompower <-
           ) +
           guides(fill = FALSE)  # removes default legends
       } else if (isTRUE(explain)) {  # Shading in type I error region
-        plot1 <- ggplot(df, aes(x = x, y = y, width = 0.15)) +
+        plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15)) +
           geom_bar(
             stat = "identity",
             col = "black",
@@ -91,7 +92,7 @@ iscam_binompower <-
         paste("P(X \u2265 ", rr, ") = ", showprob1, sep = "")
       df <- data.frame(x = thisx, y = dbinom(thisx, n, prob1))
       if (!isTRUE(explain)) {
-        plot1 <- ggplot(df, aes(x = x, y = y, width = 0.15)) +
+        plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15)) +
           geom_bar(
             stat = "identity",
             col = "black",
@@ -106,7 +107,7 @@ iscam_binompower <-
             fill = "#007f80"
           )
       } else if (isTRUE(explain)) {  # shades in type i error
-        plot1 <- ggplot(df, aes(x = x, y = y, width = 0.15)) +
+        plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15)) +
           geom_bar(
             stat = "identity",
             col = "black",
@@ -144,7 +145,7 @@ iscam_binompower <-
               sep = "")
       df <- data.frame(x = thisx, y = dbinom(thisx, n, prob1))
       if (!isTRUE(explain)) {
-        plot1 <- ggplot(df, aes(x = x, y = y, width = 0.15)) +
+        plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15)) +
           geom_bar(
             stat = "identity",
             col = "black",
@@ -159,7 +160,7 @@ iscam_binompower <-
             alpha = .7
           )
       } else if (isTRUE(explain)) {  # shading in type i error
-        plot1 <- ggplot(df, aes(x = x, y = y, width = 0.15)) +
+        plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.15)) +
           geom_bar(
             stat = "identity",
             col = "black",
@@ -186,7 +187,7 @@ iscam_binompower <-
     # when prob2 is specified
     if (!is.null(prob2)) {
       maintitle2 <-
-        substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")",),
+        substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")"),
                    list(x1 = n, x2 = prob2))
       if (alternative == "less") {
         this.prob2 = pbinom(rr, n, prob2)
@@ -195,9 +196,9 @@ iscam_binompower <-
           paste("P(X \u2264 ", rr, ") = ", showprob2, sep = "")
         df <- data.frame(x = thisx, y = dbinom(thisx, n, prob2))
         if (!isTRUE(explain)) {
-          plot2 <- ggplot(df, aes(
-            x = x,
-            y = y,
+          plot2 <- ggplot(df, aes_string(
+            x = "x",
+            y = "y",
             width = 0.15
           )) +
             geom_bar(
@@ -215,9 +216,9 @@ iscam_binompower <-
               alpha = .7
             )
         } else if (isTRUE(explain)) {
-          plot2 <- ggplot(df, aes(
-            x = x,
-            y = y,
+          plot2 <- ggplot(df, aes_string(
+            x = "x",
+            y = "y",
             width = 0.15
           )) +
             geom_bar(
@@ -255,9 +256,9 @@ iscam_binompower <-
           paste("P(X \u2265 ", rr, ") = ", showprob2, sep = "")
         df <- data.frame(x = thisx, y = dbinom(thisx, n, prob2))
         if (!isTRUE(explain)) {
-          plot2 <- ggplot(df, aes(
-            x = x,
-            y = y,
+          plot2 <- ggplot(df, aes_string(
+            x = "x",
+            y = "y",
             width = 0.15
           )) +
             geom_bar(
@@ -275,9 +276,9 @@ iscam_binompower <-
               alpha = .7
             )
         } else if (isTRUE(explain)) {
-          plot2 <- ggplot(df, aes(
-            x = x,
-            y = y,
+          plot2 <- ggplot(df, aes_string(
+            x = "x",
+            y = "y",
             width = 0.15
           )) +
             geom_bar(
@@ -321,9 +322,9 @@ iscam_binompower <-
                 sep = "")
         df <- data.frame(x = thisx, y = dbinom(thisx, n, prob2))
         if (!isTRUE(explain)) {
-          plot2 <- ggplot(df, aes(
-            x = x,
-            y = y,
+          plot2 <- ggplot(df, aes_string(
+            x = "x",
+            y = "y",
             width = 0.15
           )) +
             geom_bar(
@@ -340,9 +341,9 @@ iscam_binompower <-
               alpha = .7
             )
         } else if (isTRUE(explain)) {
-          plot2 <- ggplot(df, aes(
-            x = x,
-            y = y,
+          plot2 <- ggplot(df, aes_string(
+            x = "x",
+            y = "y",
             width = 0.15
           )) +
             geom_bar(
@@ -390,7 +391,7 @@ iscam_binompower <-
         ) +
         theme_bw(16, "serif") +
         theme(plot.subtitle = element_text(color = "#007f80"))
-      grid.arrange(plot1, plot2, nrow = 2)
+      gridExtra::grid.arrange(plot1, plot2, nrow = 2)
     }
     if (is.null(prob2)) {
       plot1 <- plot1 + xlim(minx, maxx) +

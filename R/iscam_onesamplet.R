@@ -22,6 +22,7 @@ iscam_onesamplet <-
            hypothesized = 0,
            alternative = NULL,
            conf.level = NULL) {
+    y <- NULL
     cat("\n", "One Sample t test\n", sep = "", "\n")  # output
     statistic <- xbar
     df <- n - 1  # Degrees of freedom
@@ -62,11 +63,11 @@ iscam_onesamplet <-
       perc <-
         c("t = -3", "t = -2", "t = -1", "t = 0", "t = 1", "t = 2", "t = 3")
       l <- paste(round(xticks, 2), perc, sep = "\n")
-      
+
       data <- data.frame(x = diffx, y = dt(x, df))
       plot <-  # This plot creates bell curve
-        ggplot(data, aes(x = x, y = y)) + geom_line(color = "dodgerblue")
-      
+        ggplot(data, aes_string(x = "x", y = "y")) + geom_line(color = "dodgerblue")
+
       if (alternative == "less") {
         pvalue <- pt(tvalue, df)
         plot1 <- plot +
@@ -137,7 +138,7 @@ iscam_onesamplet <-
       print(finalplot)
       cat("p-value: ", pvalue)
     }
-    
+
     lower = NULL
     upper = NULL
     # If confidence level is given, calculate confidence interval
@@ -167,7 +168,7 @@ iscam_onesamplet <-
         if (length(conf.level) == 1) {
           par(mar = c(4, .5, 1.5, .5), mfrow = c(3, 1))
           myxlab <- substitute(paste(mean == x1), list(x1 = signif(lower[1], 4)))
-          
+
           # plot 1
           plot(CIseq,
                dnorm(CIseq, lower[1], se),
@@ -186,7 +187,7 @@ iscam_onesamplet <-
           myxlab <- substitute(paste("population mean", s == x1), list(x1 =
                                                                         signif(lower[1], 4)))
           title(myxlab)
-          
+
           # plot 2
           plot(
             seq(min, max, .001),
@@ -236,7 +237,7 @@ iscam_onesamplet <-
                pos = 3)
           points(c(lower[k], upper[k]), c(1, 1), pch = c("[", "]"))
           lines(c(lower[k], upper[k]), c(1, 1))
-          
+
         }
       }
     }

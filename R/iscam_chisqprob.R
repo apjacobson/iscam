@@ -17,7 +17,7 @@ iscam_chisqprob <- function(xval, df) {
   mytitle <-
     paste("Chi-Square Distribution with", df, "Degrees of Freedom")
   mysubtitle <- paste("P(X \u2265", xval, ") =", showprob)
-  p <- ggplot(mydf, aes(x = x)) +
+  p <- ggplot(mydf, aes_string(x = "x")) +
     stat_function(fun = dchisq,  # creating t density curve
                   args = list(df = df),
                   color = "dodgerblue") +

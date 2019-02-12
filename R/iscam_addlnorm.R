@@ -13,7 +13,7 @@
 iscam_addlnorm <- function(x) {
   df <- data.frame(x) # Converting numeric vector x to a data frame
   ggplot(df, aes(x)) +
-    geom_histogram(aes(y = (..density..)), # Set density as y axis
+    geom_histogram(aes_string(y = ("..density..")), # Set density as y axis
                    binwidth = 0.1,
                    colour = "black", # Color of outline of histogram
                    fill = "white") +

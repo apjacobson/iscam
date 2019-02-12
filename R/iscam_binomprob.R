@@ -1,10 +1,10 @@
 #' iscam_binomprob Function
 #'
-#' This function calculates tail probabilities from the binomial distribution.  
+#' This function calculates tail probabilities from the binomial distribution.
 #' @param k number of successes of interest (must be an integer)
 #' @param n number of trials (zero or more)
 #' @param prob probability of success on each trial
-#' @param lower.tail logical; a Boolean for finding the probability above (FALSE) or below (TRUE) the inputted value (inclusive) 
+#' @param lower.tail logical; a Boolean for finding the probability above (FALSE) or below (TRUE) the inputted value (inclusive)
 #' @keywords binomial
 #' @import stats graphics ggplot2
 #' @export
@@ -13,8 +13,9 @@
 #' iscam_binomprob(6, 20, 0.4, lower.tail = FALSE)
 
 iscam_binomprob <- function(k, n, prob, lower.tail) {
+  x = NULL
   myTitle <-
-    substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")",),
+    substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")"),
                list(x1 = n, x2 = prob))  # graph's main title
   thisx <- 0:n  # range of data (number of trials)
   if (lower.tail) {
@@ -25,7 +26,7 @@ iscam_binomprob <- function(k, n, prob, lower.tail) {
       paste("P(X \u2264", k, ") =", showprob)  # creating subtitle
     df <-
       data.frame(x = thisx, y = dbinom(thisx, n, prob))  # putting data into data frame
-    plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
       geom_bar(  # creating bar graph
         stat = "identity",
         col = "black",
@@ -54,7 +55,7 @@ iscam_binomprob <- function(k, n, prob, lower.tail) {
     showprob <- format(this.prob, digits = 4)
     mySubtitle <- paste("P(X \u2265", k, ") =", showprob)
     df <- data.frame(x = thisx, y = dbinom(thisx, n, prob))
-    plot1 <- ggplot(df, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(df, aes_string(x = "x", y = "y", width = 0.25)) +
       geom_bar(
         stat = "identity",
         col = "black",

@@ -3,7 +3,7 @@
 #' This function calculates tail probability for the t distribution.
 #' @param xval x value
 #' @param df degrees of freedom
-#' @param direction a string for finding the probability above ("above") or below ("below") the inputted value 
+#' @param direction a string for finding the probability above ("above") or below ("below") the inputted value
 #' @param xval2 second observation necessary if "outside" or "between" is specified as the direction
 #' @keywords t probability
 #' @export
@@ -18,13 +18,13 @@ iscam_tprob <- function(xval, df, direction, xval2 = NULL) {
   thisx <- seq(minx, maxx, .001)  # numeric sequence from min to max
   data <- data.frame(x = thisx, y = dt(xval, df))  # Creating data frame with t probabilities
   myTitle <- paste("t distribution with", df, "degrees of freedom")
-  
+
   if (direction == "below") {
     tprob <- pt(xval, df)  # t probability
     showprob <- format(tprob, digits = 4)  # formatting t probability
     mySubtitle <-
       paste("Pr(X \u2264 ", xval, ") = ", showprob, sep = "")
-    plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
       stat_function(fun = dt,  # drawing t density curve
                     args = list(df = df),
                     color = "dodgerblue") +
@@ -50,7 +50,7 @@ iscam_tprob <- function(xval, df, direction, xval2 = NULL) {
     showprob <- format(tprob, digits = 4)  # formatting t probability
     mySubtitle <-
       paste("Pr(X \u2265 ", xval, ") = ", showprob, sep = "")
-    plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
       stat_function(fun = dt,  # drawing t density curve
                     args = list(df = df),
                     color = "dodgerblue") +
@@ -83,7 +83,7 @@ iscam_tprob <- function(xval, df, direction, xval2 = NULL) {
     showprob <- format(tprob, digits = 4)  # formatting t probability
     mySubtitle <-
       paste("Pr(", xval, " \u2264 X \u2264 ", xval2, ") = ", showprob, sep = "")
-    plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
       stat_function(fun = dt,  # drawing t density curve
                     args = list(df = df),
                     color = "dodgerblue") +
@@ -127,7 +127,7 @@ iscam_tprob <- function(xval, df, direction, xval2 = NULL) {
             ") = ",
             showprob,
             sep = "")
-    plot1 <- ggplot(data, aes(x = x, y = y, width = 0.25)) +
+    plot1 <- ggplot(data, aes_string(x = "x", y = "y", width = 0.25)) +
       stat_function(fun = dt,
                     #drawing t density curve
                     args = list(df = df),

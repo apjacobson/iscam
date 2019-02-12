@@ -13,7 +13,7 @@
 iscam_addexp <- function(x) {
   df <- data.frame(x) # Convert inputted numeric vector into data frame
   ggplot(df, aes(x)) +
-    geom_histogram(aes(y = (..density..)), # Density on y axis
+    geom_histogram(aes_string(y = ("..density..")), # Density on y axis
       #geom_histogram(aes(y = (..count..)/sum(..count..)), if you want percents on y-axis
       binwidth = (max(x) - min(x)) / 20,
       colour = "black", # Color of histogram outline

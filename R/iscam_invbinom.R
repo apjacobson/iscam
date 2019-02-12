@@ -3,7 +3,7 @@
 #' This function calculates the binomial quantile of a specified probability. The integer that achieves at most the stated probability will be returned.
 #' @param alpha alpha level
 #' @param n sample size
-#' @param prob despired probability of success
+#' @param prob probability of success
 #' @param lower.tail upper tail (FALSE) or lower tail (TRUE)
 #' @keywords inverse binomial
 #' @export
@@ -12,12 +12,14 @@
 #' iscam_invbinom(.05, 15, .20, lower.tail = FALSE)
 
 iscam_invbinom <- function(alpha, n, prob, lower.tail) {
+  x = NULL
+  y = NULL
   myTitle <-
-    substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")",),
+    substitute(paste("Binomial (", n == x1, ", ", pi == x2, ")"),
                list(x1 = n, x2 = prob))  # graph's main title
-  
+
   thisx <- 0:n  # range of data (number of trials)
-  
+
   if (lower.tail) {
     answer <- qbinom(alpha, n, prob, lower.tail) - 1  # Binomial quantile
     actualprob <-

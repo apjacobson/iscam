@@ -1,6 +1,6 @@
 #' iscam_invnorm Function
 #'
-#' This function calculates the normal quantile of a specified probability. 
+#' This function calculates the normal quantile of a specified probability.
 #' @param prob1 desired probability
 #' @param mean default = 0
 #' @param sd default = 1
@@ -17,6 +17,7 @@ iscam_invnorm <- function(prob1,
                           mean = 0,
                           sd = 1,
                           direction) {
+  x <- NULL
   min <- mean - 4 * sd  # min for x axis
   max <- mean + 4 * sd  # max for x axis
   mydf <- data.frame(x = c(min, max))  # Data frame from min to max
@@ -28,8 +29,8 @@ iscam_invnorm <- function(prob1,
   outlower <- signif(qnorm(prob1 / 2, mean, sd, lower.tail = T), 4)  # when direction == outside
   mytitle <-
     paste("Normal (mean = ", mean, ", SD = ", sd, ")", sep = "")  # graph main title
-  
-  
+
+
   if (direction == "above") {
     answer <- signif(upper, 4)  # normal quantile
     mysubtitle <- paste("Pr(X >", answer, ") =", prob1)
