@@ -1,6 +1,6 @@
 Package: ISCAM
 Title: Introduction to Fundamental Concepts and Various Applications of Statistics
-Version: 1.0
+Version: 1.0.0
 Authors@R: c(
   person("Noelle", "Pablo", email = "noellebpablo@gmail.com", role = c("aut")),
   person("Ashley", "Jacobson", email = "ashleypjacobson@gmail.com", role = c("aut", "cre")),
@@ -19,7 +19,8 @@ Imports:
   ggplot2,
   utils,
   gridExtra,
-  skimr
+  skimr, 
+  dplyr
 Suggests: 
   knitr,
   rmarkdown
