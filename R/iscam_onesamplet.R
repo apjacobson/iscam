@@ -9,7 +9,7 @@
 #' @param conf.level Input confidence level(s) for a two-sided confidence interval.
 #' @keywords one sample t test
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_onesamplet(70, 4, 25, hypothesized = 68, alternative = "greater")
 #' iscam_onesamplet(70, 4, 25, hypothesized = 68, conf.level = c(.90, .95))

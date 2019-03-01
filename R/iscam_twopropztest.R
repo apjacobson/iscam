@@ -11,7 +11,7 @@
 #' @param datatable Instead of entering the four individual numbers, you can pass in the two-way table of counts.  Be sure to label the datatable in this case.
 #' @keywords two proportion z test
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_twopropztest(6, 17, 12, 20, alternative = "less")
 #' iscam_twopropztest(10, 20, 17, 22, conf.level = .95)

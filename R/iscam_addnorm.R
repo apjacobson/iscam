@@ -5,7 +5,7 @@
 #' @param x a vector of numeric values.
 #' @keywords normal
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' data("mtcars")
 #' iscam_addnorm(mtcars$wt)

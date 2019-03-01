@@ -6,7 +6,7 @@
 #' @param df degrees of freedom
 #' @keywords t
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' data("mtcars")
 #' iscam_addtnorm(mtcars$wt, 3)

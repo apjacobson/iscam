@@ -5,7 +5,7 @@
 #' @param x a vector of numeric values.
 #' @keywords exponential
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' data("ChickWeight")
 #' iscam_addexp(ChickWeight$weight)

@@ -5,7 +5,7 @@
 #' @param df degrees of freedom
 #' @keywords chi square
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_chisqprob(10, 4)
 

@@ -7,7 +7,7 @@
 #' @param xval2 second observation necessary if "outside" or "between" is specified as the direction
 #' @keywords t probability
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_tprob(4, 5, "above")
 

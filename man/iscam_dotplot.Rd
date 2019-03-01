@@ -14,7 +14,7 @@ iscam_dotplot(response, explanatory = NULL, names = NULL)
 \item{names}{used to specify the horizontal and vertical axis labels, respectively.}
 }
 \description{
-This function displays horizontal dotplot(s). 
+This function displays horizontal dotplot(s).
 Optional: A second, categorical variable can also be specified and values will be calculated separately for each group.
 }
 \examples{

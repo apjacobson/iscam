@@ -1,12 +1,12 @@
 #' iscam_boxplot Function
 #'
-#' This function displays horizontal boxplot(s). 
-#' Optional: A second, categorical variable can also be specified and values will be calculated separately for each group. 
+#' This function displays horizontal boxplot(s).
+#' Optional: A second, categorical variable can also be specified and values will be calculated separately for each group.
 #' @param x a quantitative response variable.
 #' @param explanatory a categorical explanatory variable.
 #' @param names used to specify the horizontal and vertical axis labels, respectively.
 #' @keywords boxplot
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @export
 #' @examples
 #' iscam_boxplot(chickwts$weight)
@@ -20,14 +20,14 @@ iscam_boxplot <- function(x,
   df <- data.frame(x)
   if (is.null(explanatory)) {
     ggplot(df, aes(x = "", y = x)) +
-      geom_boxplot(  
+      geom_boxplot(
         outlier.colour = "red",  # editing look of outliers
         outlier.shape = 8,
         outlier.size = 2
       ) +
       coord_flip() +
       # if names are not specified, use the x input as the y label
-      labs(y = ifelse(is.null(names), deparse(substitute(x)), names),  
+      labs(y = ifelse(is.null(names), deparse(substitute(x)), names),
            x = "")
   }
   else{

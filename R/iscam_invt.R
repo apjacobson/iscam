@@ -6,7 +6,7 @@
 #' @param direction Specify whether you want this area to be "above", "below", or "outside" or "between"
 #' @keywords inverse t probability
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_invt(.35, 2, direction = "above")
 #' iscam_invt(.4, 3, direction = "below")

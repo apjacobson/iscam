@@ -6,7 +6,7 @@
 #' @param prob probability of success on each trial
 #' @param lower.tail logical; a Boolean for finding the probability above (FALSE) or below (TRUE) the inputted value (inclusive)
 #' @keywords binomial
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @export
 #' @examples
 #' iscam_binomprob(20, 30, 0.5, lower.tail = TRUE)

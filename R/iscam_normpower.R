@@ -9,7 +9,7 @@
 #' @param explain defaults to FALSE. If TRUE, shows a shaded graph with the Type 2 error.
 #' @keywords normal power
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_normpower(.05, 20, .5, "less", .7)
 

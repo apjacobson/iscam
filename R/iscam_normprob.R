@@ -10,7 +10,7 @@
 #' @param digits number of tick marks on x axis
 #' @keywords normal tail probability
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_normprob(2.2, direction = "above", label = "sample proportions")
 #' iscam_normprob(2, 5, 1.5, direction = "outside", label = "sample proportions", xval2 = 3)

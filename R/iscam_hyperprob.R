@@ -8,7 +8,7 @@
 #' @param lower.tail a Boolean for finding the probability above (FALSE) or below (TRUE) the inputted value (inclusive)
 #' @keywords hypergeometric probability
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_hyperprob(2, 52, 5, 13, lower.tail = FALSE)
 

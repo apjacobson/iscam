@@ -8,7 +8,7 @@
 #' @param conf.level confidence level(s) for a two-sided confidence interval
 #' @keywords one proportion z test
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_onepropztest(12, 15, .70, "less")
 #' iscam_onepropztest(12, 15, .6, "greater")

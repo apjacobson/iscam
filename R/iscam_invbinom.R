@@ -7,7 +7,7 @@
 #' @param lower.tail upper tail (FALSE) or lower tail (TRUE)
 #' @keywords inverse binomial
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_invbinom(.05, 15, .20, lower.tail = FALSE)
 

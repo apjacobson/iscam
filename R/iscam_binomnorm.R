@@ -7,7 +7,7 @@
 #' @param direction allows you to specify whether you want to find the probability
 #' "above" or "below" k or a symmetric "two.sided" probability
 #' @keywords binomial normal
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @export
 #' @examples
 #' iscam_binomnorm(20, 30, 0.5, direction = "above")

@@ -18,7 +18,7 @@ iscam_binom(k, prob, n, pi, lower.tail)
 \item{lower.tail}{logical; if TRUE, probabilities are  P[X <= k], otherwise, P[X > k]}
 }
 \description{
-This function calculates either a tail probability or the inverse cumulative 
+This function calculates either a tail probability or the inverse cumulative
 probability depending on whether k or prob is passed a question mark.
 }
 \examples{

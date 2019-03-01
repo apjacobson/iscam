@@ -4,7 +4,7 @@
 #' a log normal density function.
 #' @param x a vector of numeric values.
 #' @keywords lognormal
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @export
 #' @examples
 #' data("mtcars")

@@ -7,7 +7,7 @@
 #' @param alternative form of alternative "less", "greater", or "two.sided"
 #' @param conf.level NULL or a confidence level (one or more values) for a two-sided confidence interval
 #' @keywords binomial
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @export
 #' @examples
 #' iscam_binomtest(observed = 20, n = 35, hypothesized = 0.5, alternative = "less")

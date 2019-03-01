@@ -12,7 +12,7 @@
 #' @param conf.level a confidence level for a two-sided confidence interval
 #' @keywords two sample t test
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_twosamplet(97.25, 3.65, 8, 87.25, 9.60, 12, alternative = "less")
 #' iscam_twosamplet(97.25, 3.65, 8, 87.25, 9.60, 12, conf.level = .95)

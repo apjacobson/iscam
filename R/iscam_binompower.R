@@ -11,7 +11,7 @@
 #' @param prob2 NULL or a second probability
 #' @param explain logical, default = FALSE. Set to TRUE to see type I and II error and power on the graph
 #' @keywords binomial power rejection region
-#' @import stats graphics ggplot2 gridExtra
+#' @import graphics ggplot2 gridExtra
 #' @export
 #' @examples
 #' iscam_binompower(.05, 30, 0.5, alternative = "greater")

@@ -1,13 +1,13 @@
 #' iscam_dotplot Function
 #'
-#' This function displays horizontal dotplot(s). 
-#' Optional: A second, categorical variable can also be specified and values will be calculated separately for each group. 
+#' This function displays horizontal dotplot(s).
+#' Optional: A second, categorical variable can also be specified and values will be calculated separately for each group.
 #' @param response a quantitative response variable.
 #' @param explanatory a categorical explanatory variable.
 #' @param names used to specify the horizontal and vertical axis labels, respectively.
 #' @keywords dotplot
 #' @export
-#' @import stats graphics ggplot2
+#' @import graphics ggplot2
 #' @examples
 #' iscam_dotplot(chickwts$weight)
 #' iscam_dotplot(chickwts$weight, names = "weight")
